@@ -2,14 +2,9 @@
 const path = require('path');
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
-
-const HotModuleReplacementClient = path.resolve(
-  _dirname, '..', 'server', 'node_modules', 'webpack-hot-middleware',
-  'client?dynamicPublicPath=true&path=__webpack_hmr_client'
-);
-
 const context = require('path').resolve(__dirname);
-const mode = process.env.NODE_ENV.trim() || 'development';
+const mode = (process.env.NODE_ENV||'development').trim();
+
 module.exports = {
   mode,
   entry: {
@@ -30,7 +25,7 @@ module.exports = {
     }
   },
   module: {
-    noParse: /jquery|lodash/,
+    noParse: /jquery/,
     rules: [
       {
         test: /\.js$/,
@@ -109,4 +104,4 @@ module.exports = {
       new TerserPlugin()
     ]
   }
-}
+};

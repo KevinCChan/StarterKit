@@ -5,22 +5,22 @@ const http = require('http');
 const { exec } = require('child_process');
 const networks = Object.values(require('os').networkInterfaces());
 
-let address = null;
+let host = null;
 
 PortScanner:
 for (const intf of networks) {
-  for (const { family, internal, ipAddress } of intf) {
+  for (const { family, internal, address } of intf) {
     if (family === 'IPv4' && !internal) {
-      address = ipAddress;
+      host = address;
       break PortScanner;
     }
   } 
 }
 
-if (!address) throw new Error('No viable IPv4 interface was found');
+if (!host) throw new Error('No viable IPv4 interface was found');
 
 const app = require('./app.js')();
-
-http.createServer(app).listen(8080, address, function() {\
-  console.log(`Application listening on ${address}:${port}`);
+const port = 8080;
+http.createServer(app).listen(port, host, function() {
+  console.log(`Application listening on ${host}:${port}`);
 });
