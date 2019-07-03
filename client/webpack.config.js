@@ -58,7 +58,7 @@ module.exports = {
                   require.resolve('babel-plugin-react-css-modules'),
                   {
                     context,
-                    generateScopedName: '[path]__[name]__[local]__[hash:base64:5]',
+                    generateScopedName: '[name]__[local]__[hash:base64:5]',
                     handleMissingStyleName: 'warn',
                     webpackHotModuleReloading: true
                   }
@@ -81,10 +81,11 @@ module.exports = {
             loader: 'css-loader',
             options: {
               url: false,
-              modules: true,
+              modules: {
+                localIdentName: '[name]__[local]__[hash:base64:5]'
+              },
               importLoaders: 1,
-              sourceMap: (mode === 'development'),
-              localIdentNam: '[path]__[name]__[local]__[hash:base64:5]'
+              sourceMap: (mode === 'development')
             }
           }
         ]
