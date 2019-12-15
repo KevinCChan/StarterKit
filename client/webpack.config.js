@@ -1,9 +1,9 @@
 'use strict';
-const path = require('path');
+const mode    = (process.env.NODE_ENV||'development').trim();
+const path    = require('path');
 const webpack = require('webpack');
+const context = path.resolve(__dirname);
 const TerserPlugin = require('terser-webpack-plugin');
-const context = require('path').resolve(__dirname);
-const mode = (process.env.NODE_ENV||'development').trim();
 
 module.exports = {
   mode,
@@ -18,7 +18,7 @@ module.exports = {
     filename: '[name].js',
     publicPath: '/'
   },
-  devtool: ((mode === 'development') ? 'source-map': ''), 
+  devtool: ((mode === 'development') ? 'source-map': ''),
   resolve: {
     alias: {
       Components: path.resolve(__dirname, 'app', 'components')
@@ -35,8 +35,8 @@ module.exports = {
             loader: 'babel-loader',
             options: {
               presets: [
-                [ 
-                  require.resolve('@babel/preset-env'), 
+                [
+                  require.resolve('@babel/preset-env'),
                   {
                     targets: {
                       browsers: [ 'last 2 versions' ]
@@ -72,10 +72,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: 'style-loader',
-            options: {
-              sourceMap: (mode === 'development'),
-            }
+            loader: 'style-loader'
           },
           {
             loader: 'css-loader',
