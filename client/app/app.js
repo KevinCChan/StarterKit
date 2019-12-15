@@ -14,13 +14,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <AppContainer>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path='/' component={HelloWorld}/>
-          </Switch>
-        </BrowserRouter>
-      </AppContainer>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path='/' component={HelloWorld}/>
+        </Switch>
+      </BrowserRouter>
     );
   }
 }

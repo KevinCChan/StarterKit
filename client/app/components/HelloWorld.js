@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import { hot } from 'react-hot-loader/root';
 import './HelloWorld.css';
 
 class HelloWorld extends React.Component {
@@ -13,4 +14,4 @@ class HelloWorld extends React.Component {
   }
 }
 
-export default HelloWorld;
+export default hot(HelloWorld);
